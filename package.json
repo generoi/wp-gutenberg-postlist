@@ -1,7 +1,7 @@
 {
-  "name": "wp-gutenberg-boilerplate",
+  "name": "wp-gutenberg-postlist",
   "version": "1.0.0",
-  "description": "A boilerplate WordPress Gutenberg block",
+  "description": "A Post list block for WordPress Gutenberg",
   "main": "src/blocks.js",
   "scripts": {
     "start": "cgb-scripts start",

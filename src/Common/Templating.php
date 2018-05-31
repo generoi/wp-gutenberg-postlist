@@ -1,8 +1,8 @@
 <?php
 
-namespace GeneroWP\BlockBoilerplate\Common;
+namespace GeneroWP\BlockPostlist\Common;
 
-use GeneroWP\BlockBoilerplate\Plugin;
+use GeneroWP\BlockPostlist\Plugin;
 
 trait Templating
 {

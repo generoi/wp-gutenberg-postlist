@@ -5,7 +5,7 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
 registerBlockType('genero/example-block', {
-  title: __('Example block', 'wp-gutenberg-boilerplate'),
+  title: __('Example block', 'wp-gutenberg-postlist'),
   icon: 'email',
   category: 'embed',
   supports: {

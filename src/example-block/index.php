@@ -1,8 +1,8 @@
 <?php
 
-namespace GeneroWP\BlockBoilerplate\example_block;
+namespace GeneroWP\BlockPostlist\example_block;
 
-use GeneroWP\BlockBoilerplate\Common;
+use GeneroWP\BlockPostlist\Common;
 
 class ExampleBlock
 {

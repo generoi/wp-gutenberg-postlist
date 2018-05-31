@@ -1,4 +1,4 @@
-# wp-gutenberg-boilerplate
+# wp-gutenberg-postlist
 
 > A wordpress gutenberg boilerplate block
 
