@@ -1,0 +1,8 @@
+.editor-block-list__block[data-type^="genero/postlist"] {
+  .wp-block-genero-postlist {
+    a {
+      // Prevent click
+      pointer-events: none;
+    }
+  }
+}

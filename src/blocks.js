@@ -1,1 +1,1 @@
-import './example-block/index';
+import './postlist/index';
