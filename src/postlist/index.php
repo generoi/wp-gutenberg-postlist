@@ -104,7 +104,7 @@ class PostlistBlock
 
         if (!empty($attributes['archiveLinkText'])) {
             $attributes['archive_link']['url'] = get_post_type_archive_link($attributes['postType']);
-            $attributes['archive_link']['text'] = implode('<br />', $attributes['archiveLinkText']);
+            $attributes['archive_link']['text'] = $attributes['archiveLinkText'];
         }
 
         if (in_array($attributes['layout'], ['masonry', 'featured'])) {
