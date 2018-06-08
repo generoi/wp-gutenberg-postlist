@@ -1,3 +1,15 @@
 .wp-block-genero-postlist {
-  //
+  &__archivelink {
+    background: #444;
+    color: #fff;
+    border-radius: 3px;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+  }
+
+  &__archivelink_wrapper {
+    text-align: center;
+  }
 }

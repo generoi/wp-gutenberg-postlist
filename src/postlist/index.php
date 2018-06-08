@@ -28,6 +28,10 @@ class PostlistBlock
                         'type' => 'string',
                         'default' => $postType,
                     ],
+                    'layout' => [
+                        'type' => 'string',
+                        'default' => 'grid',
+                    ],
                     'postsToShow' => [
                         'type' => 'number',
                         'default' => 3,
@@ -47,6 +51,12 @@ class PostlistBlock
                     'orderBy' => [
                         'type'    => 'string',
                         'default' => 'date',
+                    ],
+                    'title' => [
+                        'type' => 'string',
+                    ],
+                    'archiveLinkText' => [
+                        'type' => 'string',
                     ],
                 ],
                 'render_callback' => [$this, 'render'],
@@ -90,9 +100,22 @@ class PostlistBlock
         $attributes['classes'][] = "wp-block-genero-postlist--{$attributes['postType']}";
         $attributes['classes'][] = !empty($attributes['align']) ? "align{$attributes['align']}" : '';
         $attributes['classes'][] = !empty($attributes['columns']) ? "has-{$attributes['columns']}-columns" : '';
+        $attributes['classes'][] = !empty($attributes['layout']) ? "is-{$attributes['layout']}" : '';
+
+        if (!empty($attributes['archiveLinkText'])) {
+            $attributes['archive_link']['url'] = get_post_type_archive_link($attributes['postType']);
+            $attributes['archive_link']['text'] = implode('<br />', $attributes['archiveLinkText']);
+        }
+
+        if (in_array($attributes['layout'], ['masonry', 'featured'])) {
+            wp_enqueue_script('masonry');
+            $attributes['masonry'] = [
+                'itemSelector' => '.wp-block-genero-postlist__item',
+            ];
+        }
 
         return $this->template('gutenberg', 'views/postlist.php', $attributes);
     }
 }
 
-ExampleBlock::get_instance();
+PostlistBlock::getInstance();
