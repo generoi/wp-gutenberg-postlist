@@ -12,6 +12,8 @@ License URI:        http://opensource.org/licenses/MIT
 namespace GeneroWP\BlockPostlist;
 
 use Puc_v4_Factory;
+use GeneroWP\Common\Singleton;
+use GeneroWP\Common\Assets;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -23,8 +25,8 @@ if (file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
 
 class Plugin
 {
-    use Common\Singleton;
-    use Common\EnqueueFilemtime;
+    use Singleton;
+    use Assets;
 
     public $version = '1.0.0';
     public $plugin_name = 'wp-gutenberg-postlist';
@@ -54,13 +56,13 @@ class Plugin
 
     public function block_assets()
     {
-        $this->enqueue_style('block/css', 'dist/blocks.style.build.css', ['wp-blocks']);
+        $this->enqueueStyle('wp-gutenberg-postlist/block/css', 'dist/blocks.style.build.css', ['wp-blocks']);
     }
 
     public function block_editor_assets()
     {
-        $this->enqueue_script('block/js', 'dist/blocks.build.js', ['wp-blocks', 'wp-i18n', 'wp-element']);
-        $this->enqueue_style('block/editor/css', 'dist/blocks.editor.build.css', ['wp-edit-blocks']);
+        $this->enqueueScript('wp-gutenberg-postlist/block/js', 'dist/blocks.build.js', ['wp-blocks', 'wp-i18n', 'wp-element']);
+        $this->enqueueStyle('wp-gutenberg-postlist/block/editor/css', 'dist/blocks.editor.build.css', ['wp-edit-blocks']);
     }
 }
 

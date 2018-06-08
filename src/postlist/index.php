@@ -1,13 +1,14 @@
 <?php
 
-namespace GeneroWP\BlockPostlist\example_block;
+namespace GeneroWP\BlockPostlist\postlist;
 
-use GeneroWP\BlockPostlist\Common;
+use GeneroWP\Common\Singleton;
+use GeneroWP\Common\Templating;
 
-class ExampleBlock
+class PostlistBlock
 {
-    use Common\Singleton;
-    use Common\Templating;
+    use Singleton;
+    use Templating;
 
     public function __construct()
     {
@@ -90,7 +91,7 @@ class ExampleBlock
         $attributes['classes'][] = !empty($attributes['align']) ? "align{$attributes['align']}" : '';
         $attributes['classes'][] = !empty($attributes['columns']) ? "has-{$attributes['columns']}-columns" : '';
 
-        return $this->template('postlist', $attributes);
+        return $this->template('gutenberg', 'views/postlist.php', $attributes);
     }
 }
 
