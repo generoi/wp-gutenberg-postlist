@@ -16,6 +16,8 @@
     <?php endforeach; ?>
   </div>
   <?php if (!empty($archive_link['url'])) : ?>
-    <a href="<?php echo esc_attr($archive_link['url']); ?>" class="wp-block-genero-postlist__archivelink"><?php echo esc_html($archive_link['text']); ?></a>
+    <div class="wp-block-genero-postlist__archivelink_wrapper">
+      <a href="<?php echo esc_attr($archive_link['url']); ?>" class="wp-block-genero-postlist__archivelink"><?php echo esc_html($archive_link['text']); ?></a>
+    </div>
   <?php endif; ?>
 </div>

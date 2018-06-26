@@ -1,0 +1,40 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/edit.js:14
+msgid "grid"
+msgstr ""
+
+#: src/edit.js:15
+msgid "masonry"
+msgstr ""
+
+#: src/edit.js:16
+msgid "featured"
+msgstr ""
+
+#: src/edit.js:30
+msgid "Layout"
+msgstr ""
+
+#: src/edit.js:37
+msgid "Columns"
+msgstr ""
+
+#: src/edit.js:59
+msgid "Write heading…"
+msgstr ""
+
+#: src/edit.js:78
+msgid "Link to archive…"
+msgstr ""
+
+#: src/index.js:12
+msgid "Listing: %s"
+msgstr ""
+
+#: src/index.js:21
+msgid "list"
+msgstr ""

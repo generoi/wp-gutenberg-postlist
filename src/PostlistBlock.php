@@ -1,6 +1,6 @@
 <?php
 
-namespace GeneroWP\BlockPostlist\postlist;
+namespace GeneroWP\BlockPostlist;
 
 use GeneroWP\Common\Singleton;
 use GeneroWP\Common\Templating;
@@ -77,11 +77,11 @@ class PostlistBlock
     {
         return apply_filters('wp-gutenberg-postlist/posttypes', [
             'post' => [
-                'label' => __('Post'),
+                'label' => __('Post', 'wp-gutenberg-postlist'),
                 'icon' => 'admin-post',
                 'keywords' => [
-                    __('post'),
-                    __('archive'),
+                    __('post', 'wp-gutenberg-postlist'),
+                    __('archive', 'wp-gutenberg-postlist'),
                 ],
             ],
         ]);
@@ -111,11 +111,10 @@ class PostlistBlock
             wp_enqueue_script('masonry');
             $attributes['masonry'] = [
                 'itemSelector' => '.wp-block-genero-postlist__item',
+                'isFitWidth' => true,
             ];
         }
 
-        return $this->template('gutenberg', 'views/postlist.php', $attributes);
+        return $this->template('gutenberg', '../views/postlist.php', $attributes);
     }
 }
-
-PostlistBlock::getInstance();

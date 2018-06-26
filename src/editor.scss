@@ -1,0 +1,38 @@
+.editor-block-list__block[data-type^="genero/postlist"] {
+  .wp-block-genero-postlist {
+    &__archivelink {
+      &[data-is-placeholder-visible=true] {
+        width: 170px;
+      }
+    }
+
+    &__item {
+      font-size: 1rem;
+
+      * {
+        font-size: inherit;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+
+    @for $i from 2 through 4 {
+      $-cells: 12 / $i;
+      $-width: ($-cells / 12) * 100%;
+
+      &.has-#{$i}-columns.is-featured .wp-block-genero-postlist__item:first-child {
+        $-width: $-width * 2;
+        width: calc(#{$-width} - 1rem);
+      }
+    }
+
+    a {
+      // Prevent click
+      pointer-events: none;
+      display: inline-block;
+    }
+  }
+}
