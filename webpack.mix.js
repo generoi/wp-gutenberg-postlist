@@ -7,8 +7,8 @@ mix.react('src/index.js', 'dist/');
 mix.babelConfig({
   'plugins': [
     [
-      '@wordpress/babel-plugin-makepot', { 'output': 'languages/javascript.pot' }
-    ]
+      '@wordpress/babel-plugin-makepot', { 'output': 'languages/javascript.pot' },
+    ],
   ],
 });
 
