@@ -2,13 +2,15 @@ import CustomServerSideRender from './CustomServerSideRender';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment, createRef, findDOMNode } from '@wordpress/element';
-import { RangeControl, SelectControl, QueryControls } from '@wordpress/components';
+import { RangeControl, SelectControl, QueryControls, withAPIData } from '@wordpress/components';
 import { InspectorControls, RichText } from '@wordpress/editor';
 import { select, subscribe } from '@wordpress/data';
+import { get } from 'lodash';
+import { stringify } from 'querystringify';
 
 function edit(props) {
-  const { attributes, setAttributes, isSelected } = props;
-  const { title, archiveLinkText, columns, layout, order, orderBy, postsToShow } = attributes;
+  const { attributes, setAttributes, isSelected, categoriesList } = props;
+  const { title, archiveLinkText, columns, layout, order, orderBy, postsToShow, categories } = attributes;
 
   const layoutOptions = [
     { value: 'grid', label: __('grid', 'wp-gutenberg-postlist') },
@@ -21,9 +23,12 @@ function edit(props) {
       <QueryControls
         { ...{ order, orderBy } }
         numberOfItems={ postsToShow }
+        categoriesList={ get( categoriesList, ['data'], {} ) }
+        selectedCategoryId={ categories }
         onOrderChange={ ( value ) => setAttributes( { order: value } ) }
         onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
         onNumberOfItemsChange={ ( value ) => setAttributes( { postsToShow: value } ) }
+        onCategoryChange={ ( value ) => setAttributes( { categories: '' !== value ? value : undefined } ) }
       />
       <SelectControl
         key="layout-input"
@@ -61,7 +66,7 @@ function edit(props) {
       ) : null }
       <CustomServerSideRender
         block={ `genero/postlist-${this.postType}` }
-        attributes={ { columns, layout, order, orderBy, postsToShow } }
+        attributes={ { columns, layout, order, orderBy, postsToShow, categories } }
         ref={ this.serverSideRef }
         onUpdate={ this.initMasonry }
       />
@@ -123,5 +128,14 @@ export default function (postType) {
   proto.initMasonry = proto.initMasonry.bind(proto);
   proto.reflowMasonry = proto.reflowMasonry.bind(proto);
 
-  return edit.bind(proto);
+  return withAPIData( () => {
+    const categoriesListQuery = stringify({
+      per_page: 100,
+      _fields: ['id', 'name', 'parent'],
+    });
+
+    return {
+      categoriesList: `/wp/v2/categories?${ categoriesListQuery }`,
+    };
+  })(edit.bind(proto));
 }

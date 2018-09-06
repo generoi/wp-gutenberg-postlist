@@ -52,6 +52,9 @@ class PostlistBlock
                         'type'    => 'string',
                         'default' => 'date',
                     ],
+                    'categories' => [
+                        'type'    => 'string',
+                    ],
                     'title' => [
                         'type' => 'string',
                     ],
@@ -95,6 +98,7 @@ class PostlistBlock
             'order' => $attributes['order'],
             'post_type' => $attributes['postType'],
             'post_status' => 'publish',
+            'category' => $attributes['categories'],
         ]);
 
         $attributes['classes'][] = "wp-block-genero-postlist--{$attributes['postType']}";

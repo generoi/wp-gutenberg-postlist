@@ -65,5 +65,8 @@
     "stylelint-config-genero": "git+https://github.com/generoi/stylelint-config-genero.git",
     "wp-pot-cli": "^1.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "querystringify": "^2.0.0"
+  }
 }
