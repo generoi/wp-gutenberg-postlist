@@ -3,31 +3,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/edit.js:14
+#: src/edit.js:16
 msgid "grid"
 msgstr ""
 
-#: src/edit.js:15
+#: src/edit.js:17
 msgid "masonry"
 msgstr ""
 
-#: src/edit.js:16
+#: src/edit.js:18
 msgid "featured"
 msgstr ""
 
-#: src/edit.js:30
+#: src/edit.js:35
 msgid "Layout"
 msgstr ""
 
-#: src/edit.js:37
+#: src/edit.js:42
 msgid "Columns"
 msgstr ""
 
-#: src/edit.js:59
+#: src/edit.js:64
 msgid "Write heading…"
 msgstr ""
 
-#: src/edit.js:78
+#: src/edit.js:83
 msgid "Link to archive…"
 msgstr ""
 
