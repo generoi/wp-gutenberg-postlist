@@ -2,10 +2,9 @@ import CustomServerSideRender from './CustomServerSideRender';
 
 import { __ } from '@wordpress/i18n';
 import { Fragment, createRef, findDOMNode } from '@wordpress/element';
-import { RangeControl, SelectControl, QueryControls, withAPIData } from '@wordpress/components';
+import { RangeControl, SelectControl, QueryControls } from '@wordpress/components';
 import { InspectorControls, RichText } from '@wordpress/editor';
-import { select, subscribe } from '@wordpress/data';
-import { get } from 'lodash';
+import { withSelect, select, subscribe } from '@wordpress/data';
 import { stringify } from 'querystringify';
 
 function edit(props) {
@@ -23,7 +22,7 @@ function edit(props) {
       <QueryControls
         { ...{ order, orderBy } }
         numberOfItems={ postsToShow }
-        categoriesList={ get( categoriesList, ['data'], {} ) }
+        categoriesList={ categoriesList }
         selectedCategoryId={ categories }
         onOrderChange={ ( value ) => setAttributes( { order: value } ) }
         onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
@@ -128,14 +127,15 @@ export default function (postType) {
   proto.initMasonry = proto.initMasonry.bind(proto);
   proto.reflowMasonry = proto.reflowMasonry.bind(proto);
 
-  return withAPIData( () => {
+  return withSelect( (select) => {
+    const { getEntityRecords } = select('core');
+
     const categoriesListQuery = stringify({
       per_page: 100,
-      _fields: ['id', 'name', 'parent'],
     });
 
     return {
-      categoriesList: `/wp/v2/categories?${ categoriesListQuery }`,
+      categoriesList: getEntityRecords('taxonomy', 'category', categoriesListQuery),
     };
   })(edit.bind(proto));
 }
