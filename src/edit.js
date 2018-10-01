@@ -115,7 +115,8 @@ export default function (postType) {
     },
 
     subscribe() {
-      const sidebarOpen = !!select('core/edit-post').getActiveGeneralSidebarName();
+      const editPost = select('core/edit-post');
+      const sidebarOpen = editPost && !!editPost.getActiveGeneralSidebarName();
       if (sidebarOpen !== this.sidebarOpen) {
         window.setTimeout(this.reflowMasonry, 200);
         this.sidebarOpen = sidebarOpen;
