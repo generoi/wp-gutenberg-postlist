@@ -55,7 +55,7 @@ class Plugin
 
     public function block_assets()
     {
-        $this->enqueueStyle('wp-gutenberg-postlist/block/css', 'dist/style.css', ['wp-blocks']);
+        $this->enqueueStyle('wp-gutenberg-postlist/block/css', 'dist/style.css', ['wp-edit-blocks']);
     }
 
     public function block_editor_assets()
@@ -64,7 +64,7 @@ class Plugin
 
         $this->enqueueStyle('wp-gutenberg-postlist/block/editor/css', 'dist/editor.css', ['wp-edit-blocks']);
         $this->enqueueScript('wp-gutenberg-postlist/block/js', 'dist/index.js', ['wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-data']);
-        $this->localizeScript('wp-gutenberg-postlist/block/js', gutenberg_get_jed_locale_data($this->plugin_name));
+        wp_set_script_translations('wp-gutenberg-postlist/block/js', $this->plugin_name);
     }
 
     public function load_textdomain()
