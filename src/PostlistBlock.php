@@ -98,7 +98,7 @@ class PostlistBlock
             'order' => $attributes['order'],
             'post_type' => $attributes['postType'],
             'post_status' => 'publish',
-            'category' => $attributes['categories'],
+            'category' => $attributes['categories'] ?? null,
         ]);
 
         $attributes['classes'][] = "wp-block-genero-postlist--{$attributes['postType']}";
