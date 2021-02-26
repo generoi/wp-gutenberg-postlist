@@ -131,12 +131,10 @@ export default function (postType) {
   return withSelect( (select) => {
     const { getEntityRecords } = select('core');
 
-    const categoriesListQuery = stringify({
-      per_page: 100,
-    });
-
     return {
-      categoriesList: getEntityRecords('taxonomy', 'category', categoriesListQuery),
+      categoriesList: getEntityRecords('taxonomy', 'category', {
+        per_page: 100,
+      }),
     };
   })(edit.bind(proto));
 }
