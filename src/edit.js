@@ -3,7 +3,7 @@ import CustomServerSideRender from './CustomServerSideRender';
 import { __ } from '@wordpress/i18n';
 import { Fragment, createRef, findDOMNode } from '@wordpress/element';
 import { RangeControl, SelectControl, QueryControls } from '@wordpress/components';
-import { InspectorControls, RichText } from '@wordpress/editor';
+import { InspectorControls, RichText } from '@wordpress/block-editor';
 import { withSelect, select, subscribe } from '@wordpress/data';
 import { stringify } from 'querystringify';
 

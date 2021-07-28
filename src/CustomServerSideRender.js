@@ -1,16 +1,13 @@
 import { isEqual } from 'lodash';
-
-import { ServerSideRender } from '@wordpress/components';
+import ServerSideRender from '@wordpress/server-side-render';
 
 // https://github.com/WordPress/gutenberg/issues/7346
 export class CustomServerSideRender extends ServerSideRender {
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // core
     if (!isEqual(prevProps, this.props)) {
       this.fetch(this.props);
-    }
-    // custom
-    if (this.state.response !== prevState.response) {
+
       if (this.props.onUpdate) {
         this.props.onUpdate();
       }
