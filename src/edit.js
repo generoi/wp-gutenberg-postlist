@@ -1,11 +1,9 @@
-import CustomServerSideRender from './CustomServerSideRender';
-
 import { __ } from '@wordpress/i18n';
 import { Fragment, createRef, findDOMNode } from '@wordpress/element';
 import { RangeControl, SelectControl, QueryControls } from '@wordpress/components';
 import { InspectorControls, RichText } from '@wordpress/block-editor';
 import { withSelect, select, subscribe } from '@wordpress/data';
-import { stringify } from 'querystringify';
+import ServerSideRender from '@wordpress/server-side-render';
 
 function edit(props) {
   const { attributes, setAttributes, isSelected, categoriesList } = props;
@@ -22,7 +20,7 @@ function edit(props) {
       <QueryControls
         { ...{ order, orderBy } }
         numberOfItems={ postsToShow }
-        categoriesList={ categoriesList }
+        categoriesList={ categoriesList || [] }
         selectedCategoryId={ categories }
         onOrderChange={ ( value ) => setAttributes( { order: value } ) }
         onOrderByChange={ ( value ) => setAttributes( { orderBy: value } ) }
@@ -48,7 +46,7 @@ function edit(props) {
   );
 
   return (
-    <Fragment>
+    <div ref={ this.containerRef }>
       { controls }
       { title || isSelected ? (
         <RichText
@@ -63,11 +61,10 @@ function edit(props) {
           placeholder={ __('Write heading…', 'wp-gutenberg-postlist') }
         />
       ) : null }
-      <CustomServerSideRender
+      <ServerSideRender
         block={ `genero/postlist-${this.postType}` }
         attributes={ { columns, layout, order, orderBy, postsToShow, categories } }
         ref={ this.serverSideRef }
-        onUpdate={ this.initMasonry }
       />
       { !!archiveLinkText || isSelected ? (
         <div className="wp-block-genero-postlist__archivelink_wrapper">
@@ -83,7 +80,7 @@ function edit(props) {
           />
         </div>
       ) : null }
-    </Fragment>
+    </div>
   );
 }
 
@@ -91,8 +88,17 @@ export default function (postType) {
   const proto = {
     postType,
     serverSideRef: createRef(),
+    containerRef: createRef(),
     masonryElement: null,
     sidebarOpen: false,
+
+    observer: new MutationObserver((list) => {
+      list.forEach((mutation) => {
+        if (mutation.target.querySelector('.js-masonry')) {
+          this.initMasonry();
+        }
+      })
+    }),
 
     initMasonry() {
       if (!this.serverSideRef.current) {
@@ -112,6 +118,12 @@ export default function (postType) {
       if (this.masonryElement) {
         this.masonryElement.masonry('layout');
       }
+    },
+
+    componentDidMount() {
+      const node = findDOMNode(this.containerRef.current);
+      this.observer.observe(node, {childList: true});
+      this.initMasonry();
     },
 
     subscribe() {
