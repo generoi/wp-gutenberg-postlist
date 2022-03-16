@@ -67,7 +67,7 @@
     "wp-pot-cli": "^1.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "querystringify": "^2.0.0"
   }
 }
